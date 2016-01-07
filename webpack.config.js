@@ -1,4 +1,5 @@
 var path = require('path');
+var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
@@ -20,15 +21,11 @@ module.exports = {
       },
       {
         test: /\.styl$/,
-        loader: ExtractTextPlugin.extract('stylus', 'css?sourceMap!stylus',
-          {
-            publicPath: './',
-          }
-        ),
+        loader: 'style!css!stylus',
       },
     ],
   },
   plugins: [
-    new ExtractTextPlugin('./app.css', { allChunks: true }),
+    new webpack.optimize.DedupePlugin(),
   ],
 };
